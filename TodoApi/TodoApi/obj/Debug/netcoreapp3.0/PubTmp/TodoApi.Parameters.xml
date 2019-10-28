@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="v-daizquCertAuth" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\cases\\repros\\certAuthCollab\\TodoApi\\TodoApi\\obj\\Debug\\netcoreapp3\.0\\PubTmp\\Out\\$" />
+  </parameter>
+</parameters>
