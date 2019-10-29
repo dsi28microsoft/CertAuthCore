@@ -122,21 +122,6 @@ namespace TodoApi.Middleware
             // 4. Check thumprint of certificate
             if (String.Compare(certificate.Thumbprint.Trim().ToUpper(), _config.Thumbprint.ToUpper()) != 0) return false;
 
-            // If you also want to test if the certificate chains to a Trusted Root Authority you can uncomment the code below
-            //
-            //X509Chain certChain = new X509Chain();
-            //certChain.Build(certificate);
-            //bool isValidCertChain = true;
-            //foreach (X509ChainElement chElement in certChain.ChainElements)
-            //{
-            //    if (!chElement.Certificate.Verify())
-            //    {
-            //        isValidCertChain = false;
-            //        break;
-            //    }
-            //}
-            //if (!isValidCertChain) return false;
-
             return true;
         }
 
