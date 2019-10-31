@@ -9,6 +9,7 @@ using TodoApi.Models;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography.X509Certificates;
 using TodoApi.Middleware;
+using System.IO;
 
 namespace TodoApi.Middleware
 {
@@ -42,7 +43,7 @@ namespace TodoApi.Middleware
                 {
                     byte[] clientCertBytes = Convert.FromBase64String(certHeader);
                     certificate = new X509Certificate2(clientCertBytes);
-                    Console.WriteLine(certificate.SubjectName);
+
                     isValidCert = IsValidClientCertificate(certificate);
                    
                     if (isValidCert)
@@ -75,12 +76,6 @@ namespace TodoApi.Middleware
 
         private bool IsValidClientCertificate(X509Certificate2 certificate)
         {
-            // In this example we will only accept the certificate as a valid certificate if all the conditions below are met:
-            // 1. The certificate is not expired and is active for the current time on server.
-            // 2. The subject name of the certificate has the common name nildevecc
-            // 3. The issuer name of the certificate has the common name nildevecc and organization name Microsoft Corp
-            // 4. The thumbprint of the certificate is 30757A2E831977D8BD9C8496E4C99AB26CB9622B
-            //
             // This example does NOT test that this certificate is chained to a Trusted Root Authority (or revoked) on the server
             // and it allows for self signed certificates
             //
@@ -119,9 +114,33 @@ namespace TodoApi.Middleware
 
             if (!foundIssuerCN) return false;
 
-            // 4. Check thumprint of certificate
+            // 4. Check thumprint of certificate using appsettings.json file
+
             if (String.Compare(certificate.Thumbprint.Trim().ToUpper(), _config.Thumbprint.ToUpper()) != 0) return false;
 
+
+            // 5. find cert in Azure app service and compare it to the cert the client provided
+
+            X509Store certStore = new X509Store(StoreName.My, StoreLocation.CurrentUser);
+            certStore.Open(OpenFlags.ReadOnly);
+            X509Certificate2Collection certCollection = certStore.Certificates.Find(X509FindType.FindByThumbprint,
+                _config.Thumbprint,
+                //"be07cfbf3184d445a95a3e531dbd0fdd64a9c836", 
+                false);
+            // Get the first cert with the thumbprint
+            if (certCollection.Count > 0)
+            {
+                X509Certificate2 tempCert = certCollection[0];
+                // Use certificate
+                if (certificate.Thumbprint.ToUpper() != tempCert.Thumbprint.ToUpper())
+                {
+                    return false;
+                }
+            }
+            else return false;
+
+
+            certStore.Close();
             return true;
         }
 

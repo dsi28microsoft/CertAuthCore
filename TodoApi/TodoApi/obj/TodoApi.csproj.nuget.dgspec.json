@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\cases\\repros\\certAuthCollab\\TodoApi\\TodoApi\\TodoApi.csproj": {}
+    "C:\\cases\\repros\\certAuthCollab\\AzureWebApp\\TodoApi\\TodoApi\\TodoApi.csproj": {}
   },
   "projects": {
-    "C:\\cases\\repros\\certAuthCollab\\TodoApi\\TodoApi\\TodoApi.csproj": {
+    "C:\\cases\\repros\\certAuthCollab\\AzureWebApp\\TodoApi\\TodoApi\\TodoApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\cases\\repros\\certAuthCollab\\TodoApi\\TodoApi\\TodoApi.csproj",
+        "projectUniqueName": "C:\\cases\\repros\\certAuthCollab\\AzureWebApp\\TodoApi\\TodoApi\\TodoApi.csproj",
         "projectName": "TodoApi",
-        "projectPath": "C:\\cases\\repros\\certAuthCollab\\TodoApi\\TodoApi\\TodoApi.csproj",
+        "projectPath": "C:\\cases\\repros\\certAuthCollab\\AzureWebApp\\TodoApi\\TodoApi\\TodoApi.csproj",
         "packagesPath": "C:\\Users\\v-daizqu\\.nuget\\packages\\",
-        "outputPath": "C:\\cases\\repros\\certAuthCollab\\TodoApi\\TodoApi\\obj\\",
+        "outputPath": "C:\\cases\\repros\\certAuthCollab\\AzureWebApp\\TodoApi\\TodoApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
